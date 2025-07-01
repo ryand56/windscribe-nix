@@ -128,7 +128,16 @@
               wantedBy = [ "multi-user.target" ];
               serviceConfig = {
                 ExecStart = "${cfg.package}/opt/windscribe/helper";
+
+                # Run as root to allow setgid syscall
+                User = "root";
                 Group = "windscribe";
+            
+                # Security and isolation
+                CapabilityBoundingSet = [ "CAP_SETGID" ];
+                AmbientCapabilities = [ "CAP_SETGID" ];
+                NoNewPrivileges = false;
+
                 Restart = "on-failure";
               };
             };
