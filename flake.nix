@@ -27,10 +27,10 @@
         in
         stdenv.mkDerivation rec {
           pname = "windscribe-v2-bin";
-          version = "2.14.10";
+          version = "2.15.8";
           src = pkgs.fetchurl {
-            url = "https://deploy.totallyacdn.com/desktop-apps/${version}/windscribe_${version}_x86_64.pkg.tar.zst";
-            hash = "sha256-Ijho19vbmqM25MvSFxavtXwwI/abjOO9ZNrWV0n8SmA=";
+            url = "https://deploy.totallyacdn.com/desktop-apps/${version}/windscribe_${version}_amd64.pkg.tar.zst";
+            hash = "sha256-gZXwMZQcmYfmI3WXqQpOG1YJJx+GnWktWKxWz5Zr7Qk=";
           };
 
           nativeBuildInputs = [ 
@@ -95,7 +95,7 @@
             description = "Windscribe GUI tool for Linux";
             homepage = "https://windscribe.com/guides/linux";
             license = lib.licenses.gpl2Only;
-            platforms = lib.platforms.linux;
+            platforms = lib.intersectLists lib.platforms.x86_64 lib.platforms.linux;
             sourceProvenance = [ lib.sourceTypes.binaryNativeCode ];
             maintainers = with lib.maintainers; [ ItzDerock ];
           };
